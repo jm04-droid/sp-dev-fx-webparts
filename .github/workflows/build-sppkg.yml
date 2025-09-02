@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js 16
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16
 
@@ -29,7 +29,8 @@ jobs:
         working-directory: samples/react-script-editor
 
       - name: Upload sppkg artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sppkg
           path: samples/react-script-editor/sharepoint/solution/*.sppkg
+
