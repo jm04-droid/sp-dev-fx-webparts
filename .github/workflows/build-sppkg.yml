@@ -20,13 +20,15 @@ jobs:
         run: npm install
         working-directory: samples/react-script-editor
 
-      - name: Bundle solution
-        run: gulp bundle --ship
-        working-directory: samples/react-script-editor
+        - name: Bundle solution
+  run: npx gulp bundle --ship --no-lint
+  working-directory: samples/react-script-editor
 
-      - name: Package solution
-        run: gulp package-solution --ship
-        working-directory: samples/react-script-editor
+- name: Package solution
+  run: npx gulp package-solution --ship --no-lint
+  working-directory: samples/react-script-editor
+
+
 
       - name: Upload sppkg artifact
         uses: actions/upload-artifact@v4
