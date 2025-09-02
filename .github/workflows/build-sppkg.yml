@@ -1,0 +1,35 @@
+name: Build SPFx Solution
+
+on:
+  workflow_dispatch:   # lets you trigger build manually from GitHub UI
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: samples/react-script-editor
+
+      - name: Bundle solution
+        run: gulp bundle --ship
+        working-directory: samples/react-script-editor
+
+      - name: Package solution
+        run: gulp package-solution --ship
+        working-directory: samples/react-script-editor
+
+      - name: Upload sppkg artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sppkg
+          path: samples/react-script-editor/sharepoint/solution/*.sppkg
